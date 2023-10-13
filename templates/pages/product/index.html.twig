@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Produits{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% if not products.items is same as ([]) %}
+            <h1 class="my-4" > Listes Produits </h1>
+
+            <a href="{{ path('product.new') }}" class="btn btn-secondary">
+                Créer un produit
+            </a>
+            {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">  
+                {{ message }}
+            </div>
+            {% endfor %}
+            <div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Déscription</th>
+                            <th scope="col">Quantité stock</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Types</th>
+                            <th scope="col">Genre</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                        <tr class="table-info">
+                            <td scope="row">{{ product.title}}</td>
+                            <td>{{ product.description }}</td>
+                            <td>{{ product.quantityStock }}</td>
+                            <td>{{ product.price }}</td>
+                            <td>{{ product.types }}</td>
+                            <td>{{ product.gender }}</td>
+                            <td>
+                                <a href="{{ path('product.edit', { id: product.id } ) }}" class=""><i class="fa-solid fa-pen-to-square" style="color: #28c850;"></i></i></a>
+                                <a href="{{ path('product.delete', { id: product.id} ) }}" class="mx-4"><i class="fa-solid fa-trash" style="color: #c33218;"></i></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    
+                    </tbody>
+                </table>
+                
+            </div>
+            <div class="navigation">
+                {{ knp_pagination_render(products) }}
+            </div>
+        {% else %}
+           <h4> Il n'y a pas des produits </h4>
+        {% endif %}
+    </div>
+{% endblock %}
+
