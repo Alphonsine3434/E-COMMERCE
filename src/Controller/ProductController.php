@@ -6,9 +6,7 @@ use App\Entity\Product;
 use App\Form\ProductsType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use PDO;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,10 +41,7 @@ class ProductController extends AbstractController
 
     
     #[Route('/product/new', name: 'product.new', methods: ['GET', 'POST'] )]
-    public function new(
-        Request $request,
-        EntityManagerInterface $manager,
-    ): Response
+    public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $product = new Product();
 
@@ -108,27 +103,18 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product/suppression/{id}', name: 'product.delete', methods: ['GET'] )]
-    public function delete(EntityManagerInterface $manager, Product $product): Response
+    public function delete(EntityManagerInterface $manager, Product $product, Request $request): Response
     {
+        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+            $manager->remove($product);
+            $manager->flush();
 
-        if(!$product){
             $this->addFlash(
-                'warning',
-                'Le produit en question n\' a pas été trouvé'
+                'success',
+                'Votre produit a été supprimé avec succés'
             );    
-    
-            return $this->redirectToRoute('product.index');
         }
-
-        $manager->remove($product);
-        
-        $manager->flush();
  
-        $this->addFlash(
-            'success',
-            'Votre produit a été supprimé avec succés'
-        );    
-
         return $this->redirectToRoute('product.index');
     }
 }

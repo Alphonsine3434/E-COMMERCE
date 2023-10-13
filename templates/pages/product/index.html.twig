@@ -1,15 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Produits{% endblock %}
+{% block title %}Product{% endblock %}
 
 {% block body %}
     <div class="container">
         {% if not products.items is same as ([]) %}
-            <h1 class="my-4" > Listes Produits </h1>
-
-            <a href="{{ path('product.new') }}" class="btn btn-secondary">
-                Créer un produit
-            </a>
+            <h2 class="my-4" > Listes Produits </h2>
+            <div class="d-flex justify-content-end">
+                <a href="{{ path('product.new') }}" class="btn btn-secondary">Créer un produit</a>
+            </div>
             {% for message in app.flashes('success') %}
             <div class="alert alert-success mt-4">  
                 {{ message }}

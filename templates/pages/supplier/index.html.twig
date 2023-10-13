@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supplier index{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        {% if not suppliers.items is same as ([]) %}
+            <h2 class="my-4" > Listes Fournisseurs </h2>
+            <div class="d-flex justify-content-end">
+                <a href="{{ path('supplier.new') }}" class="btn btn-secondary">Créer un Fournisseur</a>
+            </div>
+            {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-4">  
+                {{ message }}
+            </div>
+            {% endfor %}
+            <div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Référence</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for supplier in suppliers %}
+                        <tr class="table-info">
+                            <td scope="row">{{ supplier.reference }}</td>
+                            <td>{{ supplier.name }}</td>
+                            <td class="d-flex">
+                                <div>
+                                    <a href="{{ path('supplier.edit', {'id': supplier.id}) }}" class=""><i class="fa-solid fa-pen-to-square" style="color: #28c850;"></i></i></a>
+                                </div>
+                                <form method="post" class="mx-4" action="{{ path('supplier.delete', {'id': supplier.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ supplier.id) }}">
+                                    <button class="btn" id="btnDelete" style="padding:0!important"><i class="fa-solid fa-trash" style="color: #c33218;"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    
+                    </tbody>
+                </table>
+                
+            </div>
+            <div class="navigation">
+                {{ knp_pagination_render(suppliers) }}
+            </div>
+        {% else %}
+           <h4> Il n'y a pas des produits </h4>
+        {% endif %}
+    </div>
+
+
+{% endblock %}

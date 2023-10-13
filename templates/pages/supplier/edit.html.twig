@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edition Produits{% endblock %}
+{% block title %}Edit Supplier{% endblock %}
 
 {% block body %}
+
     <div class="container">
-        <h2 class="my-4"> Editer Produits </h2>
+        <h2 class="my-4"> Editer Fournisseur </h2>
         {{ include('pages/supplier/_form.html.twig', {'button_label': 'Update'}) }}
     </div>
+    
 {% endblock %}
