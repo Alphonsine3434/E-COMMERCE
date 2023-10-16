@@ -21,7 +21,7 @@ class Supplier
     #[Assert\Length( min: 2 )]
     private ?string $name = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, unique: true)]
     #[Assert\NotBlank]
     #[Assert\Length( min: 2 )]
     private ?string $reference = null;
