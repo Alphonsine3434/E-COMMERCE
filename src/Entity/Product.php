@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -38,6 +40,17 @@ class Product
 
     #[ORM\Column(length: 100)]
     private ?string $gender = null;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Brands $brands = null;
+
+    #[ORM\OneToMany(mappedBy: 'products', targetEntity: OrdersDetails::class)]
+    private Collection $ordersDetails;
+
+    public function __construct()
+    {
+        $this->ordersDetails = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -112,6 +125,48 @@ class Product
     public function setGender(string $gender): static
     {
         $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getBrands(): ?Brands
+    {
+        return $this->brands;
+    }
+
+    public function setBrands(?Brands $brands): static
+    {
+        $this->brands = $brands;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrdersDetails>
+     */
+    public function getOrdersDetails(): Collection
+    {
+        return $this->ordersDetails;
+    }
+
+    public function addOrdersDetail(OrdersDetails $ordersDetail): static
+    {
+        if (!$this->ordersDetails->contains($ordersDetail)) {
+            $this->ordersDetails->add($ordersDetail);
+            $ordersDetail->setProducts($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrdersDetail(OrdersDetails $ordersDetail): static
+    {
+        if ($this->ordersDetails->removeElement($ordersDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($ordersDetail->getProducts() === $this) {
+                $ordersDetail->setProducts(null);
+            }
+        }
 
         return $this;
     }
