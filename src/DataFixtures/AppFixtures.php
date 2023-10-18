@@ -4,9 +4,10 @@ namespace App\DataFixtures;
 
 Use App\Entity\Product;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class AppFixtures extends Fixture
+class AppFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -22,9 +23,20 @@ class AppFixtures extends Fixture
                 ->setTypes($mots_types[mt_rand(0,2)])
                 ->setGender($mots_gender[mt_rand(0,4)]);
 
+            //On va chercher marque du produit
+            $brands = $this->getReference('brand-'.rand(1,20));
+            $product->setBrands($brands);
+
             $manager->persist($product);
         }
 
         $manager->flush();
+    }
+
+    public function getDependencies(): array
+    {
+        return [
+            BrandsFixtures::class
+        ];
     }
 }
