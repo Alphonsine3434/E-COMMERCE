@@ -80,11 +80,11 @@ class RegistrationFormType extends AbstractType
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Vous devez insérer vos numéro de téléphone'
+                        'message' => 'Veiller insérer vos numéro de téléphone'
                     ]),
                     new Length( [
                         'min' => 5,
-                        'minMessage' => 'Vous devez entrer au moins 5 caractères'
+                        'minMessage' => 'Veiller entrer au moins 5 caractères'
                     ] ),
                 ],
             ])
@@ -99,7 +99,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Vous devez insérer vos email'
+                        'message' => 'Veiller insérer vos email'
                     ]),
                 ],
             ])
@@ -109,7 +109,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Veiller accepter le terms.',
                     ]),
                 ],
             ])
@@ -125,7 +125,7 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password', 'class' => 'form-control'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Veiller entrer le mot de pass',
                     ]),
                     new Length([
                         'min' => 6,
@@ -140,7 +140,7 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ],
-                'label' => 'S\'inscrire',
+                'label' => 'M\'inscrire',
             ])
         ;
     }

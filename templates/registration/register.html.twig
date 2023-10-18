@@ -64,11 +64,13 @@
                 </div>
             </div>
         
-            <div class="form-group">
-                {{ form_row(registrationForm.save) }}
+            <div class="d-flex">
+                <div class="form-group">
+                    {{ form_row(registrationForm.save) }}
+                </div>
+                <button class="btn btn-secondary mt-4 mx-4"><a href="{{ path('app_login') }}" style="text-decoration:none; color:white;">Me connecter</a></button>
             </div>
         {{ form_end(registrationForm) }}
     </div>
 {% endblock %}
-
 
