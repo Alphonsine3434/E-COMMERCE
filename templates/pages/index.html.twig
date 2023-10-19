@@ -17,8 +17,8 @@
                     <h5 class="card-title">{{ product.title}}</h5>
                     <p class="card-text">{{ product.types }} , {{ product.gender }}</p>
                     <h6 class="card-title">{{ product.price}}</h6>
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Acheter</button>
-                    <!-- Modal -->
+                    <button type="button" class="btn btn-secondary" ><a href="{{ path('cart_add', {id: product.id}) }}" style="text-decoration:none;"> Acheter </a></button>
+                    {# <!-- Modal -->
                     <div class="modal">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -37,7 +37,7 @@
                             </div>
                             </div>
                         </div>
-                    </div>
+                    </div> #}
                 </div>
             </div>
         {% endfor %}
