@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Brands;
 use App\Entity\Supplier;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -40,6 +42,24 @@ class SupplierType extends AbstractType
                     new Assert\NotBlank(),
                     new Assert\Length( min: 2 )
                 ]
+            ])
+            ->add('brands', CollectionType::class, [
+                'entry_type' => BrandsType::class,
+                'label' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'entry_options' => [
+                    'attr' => [
+                        'class' => 'form-control',
+                        
+                    ],                   
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\Length( min: 2 )
+                ]
+                
             ])
             ->add('save', SubmitType::class, [
                 'attr' => [

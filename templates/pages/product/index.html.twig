@@ -25,7 +25,9 @@
                             <th scope="col">Prix</th>
                             <th scope="col">Types</th>
                             <th scope="col">Genre</th>
+                            <th scope="col">Marque</th>
                             <th scope="col">Action</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -37,6 +39,7 @@
                             <td>{{ product.price }}</td>
                             <td>{{ product.types }}</td>
                             <td>{{ product.gender }}</td>
+                            <td>{{ product.brands.name }}</td>
                             <td>
                                 <a href="{{ path('product.edit', { id: product.id } ) }}" class=""><i class="fa-solid fa-pen-to-square" style="color: #28c850;"></i></i></a>
                                 <a href="{{ path('product.delete', { id: product.id} ) }}" class="mx-4"><i class="fa-solid fa-trash" style="color: #c33218;"></i></i></a>

@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Brands;
 use App\Entity\Product;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -88,6 +90,17 @@ class ProductsType extends AbstractType
                     'class' => 'form-control'
                 ],
                 'label' => 'Genre',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ]
+            ])
+            ->add('brands', EntityType::class, [
+                'class' => Brands::class,
+                'choice_label' => 'name',
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+                'label' => 'Marque',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ]
