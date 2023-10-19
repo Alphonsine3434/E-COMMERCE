@@ -19,7 +19,7 @@ class BrandsFixtures extends Fixture implements DependentFixtureInterface
             $brands->setName($mots_brands[mt_rand(0,4)]);
             
             //On va chercher fournisseur du marque
-            $supplier = $this->getReference('supplier-'.rand(1,20));
+            $supplier = $this->getReference('supplier-'.$i+1);
             $brands->setSupplier($supplier);
 
             $manager->persist($brands);
