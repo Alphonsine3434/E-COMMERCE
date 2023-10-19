@@ -28,7 +28,7 @@ class Supplier
     #[Assert\Length( min: 2 )]
     private ?string $reference = null;
 
-    #[ORM\OneToMany(mappedBy: 'supplier', targetEntity: Brands::class)]
+    #[ORM\OneToMany(mappedBy: 'supplier', targetEntity: Brands::class, cascade:["persist", "remove"])]
     private Collection $brands;
 
     public function __construct()
