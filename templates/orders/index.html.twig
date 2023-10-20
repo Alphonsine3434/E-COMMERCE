@@ -22,7 +22,7 @@
                         {% for order in orders %}
                         <tr class="table-info">
                             <td scope="row">{{ order.reference }}</td>
-                            <td>Date</td>
+                            <td>{{ order.createdAt|format_datetime('short', 'none') }}</td>
                             <td>{{ order.users.name }}</td>
                             <td>{{ order.users.firstName }}</td>
                             <td>{{ order.users.email }}</td>
