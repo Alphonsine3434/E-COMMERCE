@@ -1,20 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello OrdersController!{% endblock %}
+{% block title %}Orders{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/deje/Documents/demo_symfony/demo/src/Controller/OrdersController.php'|file_link(0) }}">src/Controller/OrdersController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/deje/Documents/demo_symfony/demo/templates/orders/index.html.twig'|file_link(0) }}">templates/orders/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="container">
+            <h2 class="my-4" > Listes Commandes Validé</h2>
+            <div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Numéro</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Nom client</th>
+                            <th scope="col">Prénom Client</th>
+                            <th scope="col">Email Client</th>
+                            <th scope="col">Montant Total</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr class="table-info">
+                            <td scope="row">{{ order.reference }}</td>
+                            <td>Date</td>
+                            <td>{{ order.users.name }}</td>
+                            <td>{{ order.users.firstName }}</td>
+                            <td>{{ order.users.email }}</td>
+                            <td>Montant total</td>
+                        </tr>
+                        {% else %}
+                            <tr class="table-info">
+                                <td colspan="5"> Commande validé vide</td>
+                            </tr>
+                        {% endfor %}
+                    
+                    </tbody>
+                    
+                </table>
+                
+            </div>
+    </div>
 {% endblock %}

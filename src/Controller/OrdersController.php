@@ -6,7 +6,9 @@ use App\Entity\Orders;
 use App\Entity\OrdersDetails;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +16,36 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/orders', name: 'orders_')]
 class OrdersController extends AbstractController
 {
+    /**
+     * Show Orders
+     *
+     * @param ProductRepository $repository
+     * @param PaginatorInterface $paginator
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
+    #[Route('/view', name: 'view', methods: ['GET'] )]
+    public function index(
+        ProductRepository $repository, 
+        PaginatorInterface $paginator, 
+        Request $request , 
+        EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $repository = $entityManager->getRepository(Orders::class);
+        
+        $orders = $paginator->paginate(
+            $repository->findAll(),
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
+        
+        return $this->render('orders/index.html.twig', [
+            'orders' => $orders
+        ]);
+    }
+
     #[Route('/add', name: 'add')]
     public function add(SessionInterface $sessionInterface, ProductRepository $productRepository, EntityManagerInterface $entityManager): Response
     {
