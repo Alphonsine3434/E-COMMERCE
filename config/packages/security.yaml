@@ -13,7 +13,21 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        admin:
+            pattern:      ^/admin
+            # provider:     admin_user_provider
+            form_login:
+                login_path:     /admin/login
+                use_forward:    false
+                check_path:     /admin/login_check
+                failure_path:   null
+                default_target_path: /admin/dashboard
+                always_use_default_target_path: true
+            logout:
+                path:     /admin/logout
+                target: /admin
         main:
+            pattern:      ^/(?!admin)
             lazy: true
             provider: app_user_provider
             form_login :
