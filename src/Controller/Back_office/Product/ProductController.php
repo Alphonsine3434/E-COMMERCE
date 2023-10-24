@@ -23,7 +23,7 @@ class ProductController extends AbstractController
      * @return Response
      */
 
-    #[Route('/admin/product', name: 'app_product_liste', methods: ['GET'] )]
+    #[Route('/admin/product/liste', name: 'app_product_liste', methods: ['GET'] )]
     public function index(ProductRepository $repository, PaginatorInterface $paginator, Request $request ): Response
     {
     
@@ -33,13 +33,13 @@ class ProductController extends AbstractController
             10 /*limit per page*/
         );
         
-        return $this->render('Back_office/Product/product.html.twig', [
+        return $this->render('Back_office/Product/index.html.twig', [
             'products' => $products
         ]);
     }
 
     
-    #[Route('/product/new', name: 'product.new', methods: ['GET', 'POST'] )]
+    #[Route('/admin/product/new', name: 'app_product_new', methods: ['GET', 'POST'] )]
     public function new(Request $request, EntityManagerInterface $manager): Response
     {
         $product = new Product();
@@ -63,12 +63,12 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('app_product_liste');
         }
 
-        return $this->render('pages/product/new.html.twig', [  
+        return $this->render('Back_office/Product/new.html.twig', [  
             'form' => $form->createView()
         ]);
     }
 
-    #[Route('/product/edition/{id}', name: 'product.edit', methods: ['GET', 'POST'] )]
+    #[Route('/admin/product/edition/{id}', name: 'app_product_edit', methods: ['GET', 'POST'] )]
     public function edit(
         Product $product,
         Request $request,
@@ -96,12 +96,12 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('app_product_liste');
         }
 
-        return $this->render('pages/product/new.html.twig', [  
+        return $this->render('Back_office/Product/edit.html.twig', [  
             'form' => $form->createView()
         ]);
     }
 
-    #[Route('/product/suppression/{id}', name: 'product.delete', methods: ['GET'] )]
+    #[Route('/admin/product/suppression/{id}', name: 'app_product_delete', methods: ['GET'] )]
     public function delete(EntityManagerInterface $manager, Product $product, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {

@@ -1,62 +1,88 @@
-{% extends 'base.html.twig' %}
+{% include "Back_office/base_back.html.twig" %}
 
-{% block title %}Product{% endblock %}
+{% block header %}
+    {% include "Back_office/partials/Header/_header.html.twig" %}
+{% endblock %}
 
-{% block body %}
-    <div class="container">
-        {% if not products.items is same as ([]) %}
-            <h2 class="my-4" > Listes Produits </h2>
-            <div class="d-flex justify-content-end">
-                <a href="{{ path('product.new') }}" class="btn btn-secondary">Créer un produit</a>
-            </div>
-            {% for message in app.flashes('success') %}
-            <div class="alert alert-success mt-4">  
-                {{ message }}
-            </div>
-            {% endfor %}
-            <div>
+{% block sidebar %}
+    {% include "Back_office/partials/Sidebar/_sidebar.html.twig" %}
+{% endblock %}
 
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">Titre</th>
-                            <th scope="col">Déscription</th>
-                            <th scope="col">Quantité stock</th>
-                            <th scope="col">Prix</th>
-                            <th scope="col">Types</th>
-                            <th scope="col">Genre</th>
-                            <th scope="col">Marque</th>
-                            <th scope="col">Action</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for product in products %}
-                        <tr class="table-info">
-                            <td scope="row">{{ product.title}}</td>
-                            <td>{{ product.description }}</td>
+{% block body %} 
+    <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Produits</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Admin</a></li>
+          <li class="breadcrumb-item">Product</li>
+          <li class="breadcrumb-item active">Liste</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title">Listes Produits</h2>
+              <div class="d-flex justify-content-end">
+                <a href="{{ path('app_product_new') }}" class="btn btn-primary"><i class="ri-add-fill" style="color: #fff;"></i> Créer un produit</a>
+              </div>
+              {% if not products.items is same as ([]) %}
+        
+                {% for message in app.flashes('success') %}
+                <div class="alert alert-success mt-4">  
+                    {{ message }}
+                </div>
+                {% endfor %}
+
+              <!-- Table with stripped rows -->
+              <table class="table datatable mt-4">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Types</th>
+                    <th scope="col">Marque</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                        <tr class="">
+                            <th scope="row"></th>
+                            <td>{{ product.title}}</td>
                             <td>{{ product.quantityStock }}</td>
                             <td>{{ product.price }}</td>
                             <td>{{ product.types }}</td>
-                            <td>{{ product.gender }}</td>
                             <td>{{ product.brands.name }}</td>
                             <td>
-                                <a href="{{ path('product.edit', { id: product.id } ) }}" class=""><i class="fa-solid fa-pen-to-square" style="color: #28c850;"></i></i></a>
-                                <a href="{{ path('product.delete', { id: product.id} ) }}" class="mx-4"><i class="fa-solid fa-trash" style="color: #c33218;"></i></i></a>
+                                <a href="{{ path('app_product_edit', { id: product.id } ) }}" class=""><i class="ri-edit-2-fill" style="color: #28c850;"></i></a>
+                                <a href="{{ path('app_product_delete', { id: product.id} ) }}" class="mx-4"><i class="ri-delete-bin-5-fill" style="color: #c33218;"></i></a>
                             </td>
                         </tr>
-                        {% endfor %}
-                    
-                    </tbody>
-                </table>
-                
+                    {% endfor %}
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+              <div class="navigation">
+                  {{ knp_pagination_render(products) }}
+              </div>
+              {% else %}
+                <h4> Il n'y a pas des produits </h4>
+              {% endif %}
             </div>
-            <div class="navigation">
-                {{ knp_pagination_render(products) }}
-            </div>
-        {% else %}
-           <h4> Il n'y a pas des produits </h4>
-        {% endif %}
-    </div>
-{% endblock %}
+          </div>
 
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+{% endblock %}

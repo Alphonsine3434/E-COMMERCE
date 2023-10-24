@@ -1,11 +1,38 @@
-{% extends 'base.html.twig' %}
+{% include "Back_office/base_back.html.twig" %}
 
 {% block title %}Création Produits{% endblock %}
 
+{% block header %}
+    {% include "Back_office/partials/Header/_header.html.twig" %}
+{% endblock %}
+
+{% block sidebar %}
+    {% include "Back_office/partials/Sidebar/_sidebar.html.twig" %}
+{% endblock %}
+
 {% block body %}
-    
-    <div class="container">
-        <h2 class="my-4"> Création Produits </h2>
-        {{ include('pages/product/_form.html.twig', {'button_label': 'Update'}) }}
-    </div>
+    <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>Produits</h1>
+            <nav>
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Admin</a></li>
+                <li class="breadcrumb-item">Product</li>
+                <li class="breadcrumb-item active">Create</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body mx-4">
+                            <h2 class="card-title">Création Produits</h2>
+                            {{ include('Back_office/Product/_form.html.twig', {'button_label': 'Update'}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main><!-- End #main -->
 {% endblock %}

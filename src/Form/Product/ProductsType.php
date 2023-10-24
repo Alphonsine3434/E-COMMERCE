@@ -6,7 +6,6 @@ use App\Entity\Brands;
 use App\Entity\Product;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -31,11 +30,13 @@ class ProductsType extends AbstractType
         $builder
             ->add('title', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Titre',
+                    'id' => 'floatingName'
                 ],
                 'label' => 'Titre',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
+                    'for' => 'floatingName'
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
@@ -44,65 +45,77 @@ class ProductsType extends AbstractType
             ])
             ->add('description', TextAreaType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Déscription',
+                    'id' => 'floatingTextArea'
                 ],
                 'label' => 'Déscription',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
+                    'for' => 'floatingTextArea'
                 ]
                 ])
             ->add('quantity_stock', NumberType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Stock',
+                    'id' => 'floatingNumber',
                 ],
-                'label' => 'Quantité de Stock',
+                'label' => 'Stock',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
+                    'for' => 'floatingNumber'
                 ],
                 'constraints' => [
                     new Assert\PositiveOrZero()
                 ]
             ])
-            ->add('price', MoneyType::class, [
+            ->add('price', NumberType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Prix',
+                    'id' => 'floatingMoney'
                 ],
                 'label' => 'Prix',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
+                    'for' => 'floatingMoney'
                 ],
                 'constraints' => [
                     new Assert\NotNull(),
-                    new Assert\Positive()
+                    new Assert\PositiveOrZero()
                 ]
             ])
             ->add('types', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Types',
+                    'id' => 'floatingTypes'
                 ],
                 'label' => 'Types',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
+                    'for' => 'floatingTypes'
                 ]
             ])
             ->add('gender', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Genre',
+                    'id' => 'floatingGender'
                 ],
                 'label' => 'Genre',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
+                    'for' => 'floatingGender'
                 ]
             ])
             ->add('brands', EntityType::class, [
                 'class' => Brands::class,
                 'choice_label' => 'name',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Marque',
+                    'id' => 'floatingBrands'
                 ],
                 'label' => 'Marque',
                 'label_attr' => [
-                    'class' => 'form-label mt-4'
+                    'for' => 'floatingBrands'
                 ]
             ])
             ->add('save', SubmitType::class, [
