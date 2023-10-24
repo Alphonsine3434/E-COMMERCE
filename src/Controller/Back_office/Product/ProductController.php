@@ -68,7 +68,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/product/edition/{id}', name: 'app_product_edit', methods: ['GET', 'POST'] )]
+    #[Route('/admin/product/edit/{id}', name: 'app_product_edit', methods: ['GET', 'POST'] )]
     public function edit(
         Product $product,
         Request $request,
@@ -101,7 +101,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/product/suppression/{id}', name: 'app_product_delete', methods: ['GET'] )]
+    #[Route('/admin/product/delete/{id}', name: 'app_product_delete', methods: ['GET'] )]
     public function delete(EntityManagerInterface $manager, Product $product, Request $request): Response
     {
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {

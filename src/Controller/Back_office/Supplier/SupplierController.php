@@ -4,7 +4,7 @@ namespace App\Controller\Back_office\Supplier;
 
 use App\Entity\Supplier;
 use App\Form\SupplierType;
-use App\Repository\SupplierRepository;
+use App\Repository\Back_office\Supplier\SupplierRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,10 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/supplier')]
+
 class SupplierController extends AbstractController
 {
-    #[Route('/', name: 'supplier.index', methods: ['GET'])]
+    #[Route('/admin/supplier/liste', name: 'app_supplier_liste', methods: ['GET'])]
     public function index(SupplierRepository $supplierRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $suppliers = $paginator->paginate(
@@ -24,13 +24,12 @@ class SupplierController extends AbstractController
             10 /*limit per page*/
         );
 
-        return $this->render('pages/supplier/index.html.twig', [
-            'suppliers' => $supplierRepository->findAll(),
+        return $this->render('Back_office/Supplier/index.html.twig', [
             'suppliers' => $suppliers
         ]);
     }
 
-    #[Route('/new', name: 'supplier.new', methods: ['GET', 'POST'])]
+    #[Route('/admin/supplier/new', name: 'app_supplier_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $supplier = new Supplier();
@@ -48,7 +47,7 @@ class SupplierController extends AbstractController
                 'Votre produit a été créé avec succés'
             );   
 
-            return $this->redirectToRoute('supplier.index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_supplier_liste', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('pages/supplier/new.html.twig', [
@@ -57,15 +56,7 @@ class SupplierController extends AbstractController
         ]);
     }
 
-    // #[Route('/{id}', name: 'supplier.show', methods: ['GET'])]
-    // public function show(Supplier $supplier): Response
-    // {
-    //     return $this->render('pages/supplier/show.html.twig', [
-    //         'supplier' => $supplier,
-    //     ]);
-    // }
-
-    #[Route('/{id}/edit', name: 'supplier.edit', methods: ['GET', 'POST'])]
+    #[Route('/admin/supplier/edit/{id}', name: 'app_supplier_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Supplier $supplier, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(SupplierType::class, $supplier);
@@ -79,7 +70,7 @@ class SupplierController extends AbstractController
                 'Votre produit a été modifié avec succés'
             );   
 
-            return $this->redirectToRoute('supplier.index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_supplier_liste', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('pages/supplier/edit.html.twig', [
@@ -88,7 +79,7 @@ class SupplierController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}/', name: 'supplier.delete', methods: ['POST'])]
+    #[Route('/admin/supplier/delete/{id}', name: 'app_supplier_delete', methods: ['POST'])]
     public function delete(Request $request, Supplier $supplier, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$supplier->getId(), $request->request->get('_token'))) {
@@ -101,6 +92,6 @@ class SupplierController extends AbstractController
             ); 
         }
 
-        return $this->redirectToRoute('supplier.index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_supplier_liste', [], Response::HTTP_SEE_OTHER);
     }
 }

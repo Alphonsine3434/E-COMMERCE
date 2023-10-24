@@ -9,13 +9,13 @@
 {% endblock %}
 
 {% block body %} 
-    <main id="main" class="main">
+  <main id="main" class="main">
 
     <div class="pagetitle">
       <h1>Produits</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Admin</a></li>
+          <li class="breadcrumb-item"><a href="index.html.twig">Admin</a></li>
           <li class="breadcrumb-item">Product</li>
           <li class="breadcrumb-item active">Liste</li>
         </ol>
@@ -32,26 +32,26 @@
               <div class="d-flex justify-content-end">
                 <a href="{{ path('app_product_new') }}" class="btn btn-primary"><i class="ri-add-fill" style="color: #fff;"></i> Créer un produit</a>
               </div>
-              {% if not products.items is same as ([]) %}
+                {% if not products.items is same as ([]) %}
         
                 {% for message in app.flashes('success') %}
                 <div class="alert alert-success mt-4">  
                     {{ message }}
                 </div>
-                {% endfor %}
+                {% endfor %}  
 
               <!-- Table with stripped rows -->
               <table class="table datatable mt-4">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Titre</th>
-                    <th scope="col">Quantité</th>
-                    <th scope="col">Prix</th>
-                    <th scope="col">Types</th>
-                    <th scope="col">Marque</th>
-                    <th scope="col">Action</th>
-                </tr>
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Titre</th>
+                      <th scope="col">Quantité</th>
+                      <th scope="col">Prix</th>
+                      <th scope="col">Types</th>
+                      <th scope="col">Marque</th>
+                      <th scope="col">Action</th>
+                  </tr>
                 </thead>
                 <tbody>
                     {% for product in products %}
