@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataFixtures\User;
+namespace App\DataFixtures;
 
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -16,18 +16,6 @@ class UsersFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $admin = new User();
-        $admin->setName('RASOA')
-            ->setFirstName('Alphonsine')
-            ->setAdress('Fenoarivo')
-            ->setPhone(34545)
-            ->setEmail('ras@gmail.com')
-            ->setPassword(
-                $this->passwordEncoder->hashPassword($admin, 'admin')
-            )
-            ->setRoles(['ROLE_ADMIN']);
-
-         $manager->persist($admin);
 
         $faker = Faker\Factory::create('fr-FR');
 
@@ -37,10 +25,12 @@ class UsersFixtures extends Fixture
             ->setFirstName($faker->firstName)
             ->setAdress($faker->address)
             ->setPhone(234543)
+            ->setUserName($faker->userName)
             ->setEmail($faker->email)
             ->setPassword(
                 $this->passwordEncoder->hashPassword($user, 'secret')
-            );
+            )
+            ->setRoles(['ROLE_USER']);
             
             $manager->persist($user);
         }

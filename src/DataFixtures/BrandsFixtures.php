@@ -1,8 +1,8 @@
 <?php
 
-namespace App\DataFixtures\Brands;
+namespace App\DataFixtures;
 
-use App\Entity\Brands\Brands;
+use App\Entity\Brands;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;

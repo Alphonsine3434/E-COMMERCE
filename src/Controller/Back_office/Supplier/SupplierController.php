@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SupplierController extends AbstractController
 {
-    #[Route('/admin/supplier/liste', name: 'app_supplier_liste', methods: ['GET'])]
+    #[Route('/admin/supplier', name: 'app_supplier_index', methods: ['GET'])]
     public function index(SupplierRepository $supplierRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $suppliers = $paginator->paginate(
@@ -47,7 +47,7 @@ class SupplierController extends AbstractController
                 'Votre produit a été créé avec succés'
             );   
 
-            return $this->redirectToRoute('app_supplier_liste', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_supplier_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('pages/supplier/new.html.twig', [
@@ -70,7 +70,7 @@ class SupplierController extends AbstractController
                 'Votre produit a été modifié avec succés'
             );   
 
-            return $this->redirectToRoute('app_supplier_liste', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_supplier_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('pages/supplier/edit.html.twig', [
@@ -92,6 +92,6 @@ class SupplierController extends AbstractController
             ); 
         }
 
-        return $this->redirectToRoute('app_supplier_liste', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_supplier_index', [], Response::HTTP_SEE_OTHER);
     }
 }

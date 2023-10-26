@@ -12,6 +12,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+
+#[UniqueEntity(fields: ['userName'], message: 'There is already an account with this userName')]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -40,6 +42,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
+
+    #[ORM\Column(length: 180, unique: true)]
+    private ?string $userName = null;
 
     #[ORM\Column]
     private array $roles = [];
@@ -107,6 +112,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhone(string $phone): static
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getUserName(): ?string
+    {
+        return $this->userName;
+    }
+
+    public function setUserName(string $userName): static
+    {
+        $this->userName = $userName;
 
         return $this;
     }

@@ -23,7 +23,7 @@ class ProductController extends AbstractController
      * @return Response
      */
 
-    #[Route('/admin/product/liste', name: 'app_product_liste', methods: ['GET'] )]
+    #[Route('/admin/product', name: 'app_product_index', methods: ['GET'] )]
     public function index(ProductRepository $repository, PaginatorInterface $paginator, Request $request ): Response
     {
     
@@ -60,7 +60,7 @@ class ProductController extends AbstractController
                 'Votre produit a été créé avec succés'
             );    
 
-            return $this->redirectToRoute('app_product_liste');
+            return $this->redirectToRoute('app_product_index');
         }
 
         return $this->render('Back_office/Product/new.html.twig', [  
@@ -93,7 +93,7 @@ class ProductController extends AbstractController
                 'Votre produit a été modifié avec succés'
             );    
 
-            return $this->redirectToRoute('app_product_liste');
+            return $this->redirectToRoute('app_product_index');
         }
 
         return $this->render('Back_office/Product/edit.html.twig', [  
@@ -114,6 +114,6 @@ class ProductController extends AbstractController
             );    
         }
  
-        return $this->redirectToRoute('app_product_liste');
+        return $this->redirectToRoute('app_product_index');
     }
 }

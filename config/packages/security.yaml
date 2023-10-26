@@ -5,26 +5,30 @@ security:
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         # used to reload user from session & other features (e.g. switch_user)
+        admin_user_provider:
+            entity:
+                class: App\Entity\Admin
+                property: email
         app_user_provider:
             entity:
                 class: App\Entity\User
                 property: email
+        # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         admin:
             pattern:      ^/admin
-            # provider:     admin_user_provider
+            lazy: true
+            provider:     admin_user_provider
             form_login:
-                login_path:     /admin/login
-                use_forward:    false
-                check_path:     /admin/login_check
-                failure_path:   null
-                default_target_path: /admin/dashboard
-                always_use_default_target_path: true
+                login_path:     admin_security_login
+                check_path:     admin_security_login
+            custom_authenticator: App\Security\AdminAuthentificatorAuthenticator
+            entry_point: form_login
             logout:
-                path:     /admin/logout
+                path: admin_security_logout
                 target: /admin
         main:
             pattern:      ^/(?!admin)
@@ -32,12 +36,12 @@ security:
             provider: app_user_provider
             form_login :
                 # "app_login" is the name of the route created previously
-                login_path: app_login
-                check_path: app_login
+                login_path: app_security_login
+                check_path: app_security_login
             custom_authenticator: App\Security\UsersAuthenticator
             entry_point: form_login
             logout:
-                path: app_logout
+                path: app_security_logout
                 # where to redirect after logout
                 # target: app_any_route
             # activate different ways to authenticate
@@ -49,8 +53,9 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-         - { path: ^/product, roles: ROLE_ADMIN }
-         - { path: ^/supplier, roles: ROLE_ADMIN }
+         - { path: ^/admin/login, roles: PUBLIC_ACCESS }
+         - { path: ^/login, roles: PUBLIC_ACCESS }
+         - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/profile, roles: ROLE_USER }
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER

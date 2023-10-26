@@ -12,15 +12,14 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\CsrfTokenBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
-use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
-class UsersAuthenticator extends AbstractLoginFormAuthenticator implements AuthenticationEntryPointInterface
+class AdminAuthentificatorAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'app_security_login';
+    public const LOGIN_ROUTE = 'admin_security_login';
 
     public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
@@ -47,8 +46,8 @@ class UsersAuthenticator extends AbstractLoginFormAuthenticator implements Authe
         }
 
         // For example:
-        return new RedirectResponse($this->urlGenerator->generate('app_home_page'));
-        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('app_product_index'));
+        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl(Request $request): string

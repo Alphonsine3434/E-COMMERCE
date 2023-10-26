@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegisterBackController extends AbstractController
 {
-    #[Route('/admin/register', name: 'app_register_back')]
+    #[Route('/admin/register', name: 'admin_register_index')]
     public function index(): Response
     {
         return $this->render('Back_office/Authentification/Register/register.html.twig');

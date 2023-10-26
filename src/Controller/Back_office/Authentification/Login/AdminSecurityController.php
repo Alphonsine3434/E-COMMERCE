@@ -1,23 +1,15 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Back_office\Authentification\Login;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class SecurityController extends AbstractController
+class AdminSecurityController extends AbstractController
 {
-    
-
-    /**
-     * Connexion
-     *
-     * @param AuthenticationUtils $authenticationUtils
-     * @return Response
-     */
-    #[Route(path: '/home/login', name: 'app_security_login')]
+    #[Route(path: '/admin/login', name: 'admin_security_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // if ($this->getUser()) {
@@ -29,13 +21,10 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', [
-            'last_username' => $lastUsername, 
-            'error' => $error
-        ]);
+        return $this->render('Back_office/Authentification/Login/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
-    #[Route(path: '/home/logout', name: 'app_security_logout')]
+    #[Route(path: '/admin/logout', name: 'admin_security_logout')]
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
