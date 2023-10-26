@@ -13,11 +13,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Fournisseurs</h1>
+            <h1>Marques</h1>
             <nav>
                 <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="index.html.twig">Admin</a></li>
-                <li class="breadcrumb-item">Supplier</li>
+                <li class="breadcrumb-item">Brands</li>
                 <li class="breadcrumb-item active">Liste</li>
                 </ol>
             </nav>
@@ -28,11 +28,11 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title">Listes Fournisseurs</h2>
+                            <h2 class="card-title">Listes Marques</h2>
                             <div class="d-flex justify-content-end">
-                                <a href="{{ path('admin_supplier_new') }}" class="btn btn-primary"><i class="ri-add-fill" style="color: #fff;"></i> Créer un Fournisseur</a>
+                                <a href="{{ path('admin_brands_new') }}" class="btn btn-primary"><i class="ri-add-fill" style="color: #fff;"></i> Créer un marque</a>
                             </div>
-                            {% if not suppliers.items is same as ([]) %}
+                            {% if not brands.items is same as ([]) %}
                     
                             {% for message in app.flashes('success') %}
                                 <div class="alert alert-success mt-4">  
@@ -45,20 +45,20 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Référence</th>
-                                        <th scope="col">Nom</th>
+                                        <th scope="col">Titre</th>
+                                        <th scope="col">Fournisseur</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for supplier in suppliers %}
+                                    {% for brand in brands %}
                                         <tr class="">
                                             <th scope="row"></th>
-                                            <td>{{ supplier.reference }}</td>
-                                            <td>{{ supplier.name }}</td>
+                                            <td>{{ brand.name }}</td>
+                                            <td>{{ brand.supplier.name }}</td>
                                             <td>
-                                                <a href="{{ path('admin_supplier_edit', { id: supplier.id } ) }}" class=""><i class="ri-edit-2-fill" style="color: #28c850;"></i></a>
-                                                <a href="{{ path('admin_supplier_delete', { id: supplier.id} ) }}" class="mx-4"><i class="ri-delete-bin-5-fill" style="color: #c33218;"></i></a>
+                                                <a href="{{ path('admin_brands_edit', { id: brand.id } ) }}" class=""><i class="ri-edit-2-fill" style="color: #28c850;"></i></a>
+                                                <a href="{{ path('admin_brands_delete', { id: brand.id} ) }}" class="mx-4"><i class="ri-delete-bin-5-fill" style="color: #c33218;"></i></a>
                                             </td>
                                         </tr>
                                     {% endfor %}
@@ -68,7 +68,7 @@
                 
                             <!-- End Table with stripped rows -->
                             <div class="navigation">
-                                {{ knp_pagination_render(suppliers) }}
+                                {{ knp_pagination_render(brands) }}
                             </div>
                             {% else %}
                                 <h4> Il n'y a pas des produits </h4>

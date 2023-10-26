@@ -30,7 +30,7 @@
             <div class="card-body">
               <h2 class="card-title">Listes Produits</h2>
               <div class="d-flex justify-content-end">
-                <a href="{{ path('app_product_new') }}" class="btn btn-primary"><i class="ri-add-fill" style="color: #fff;"></i> Créer un produit</a>
+                <a href="{{ path('admin_product_new') }}" class="btn btn-primary"><i class="ri-add-fill" style="color: #fff;"></i> Créer un produit</a>
               </div>
                 {% if not products.items is same as ([]) %}
         
@@ -63,8 +63,8 @@
                             <td>{{ product.types }}</td>
                             <td>{{ product.brands.name }}</td>
                             <td>
-                                <a href="{{ path('app_product_edit', { id: product.id } ) }}" class=""><i class="ri-edit-2-fill" style="color: #28c850;"></i></a>
-                                <a href="{{ path('app_product_delete', { id: product.id} ) }}" class="mx-4"><i class="ri-delete-bin-5-fill" style="color: #c33218;"></i></a>
+                                <a href="{{ path('admin_product_edit', { id: product.id } ) }}" class=""><i class="ri-edit-2-fill" style="color: #28c850;"></i></a>
+                                <a href="{{ path('admin_product_delete', { id: product.id} ) }}" class="mx-4"><i class="ri-delete-bin-5-fill" style="color: #c33218;"></i></a>
                             </td>
                         </tr>
                     {% endfor %}

@@ -4,7 +4,7 @@ namespace App\Controller\Back_office\Orders;
 
 use App\Entity\Orders;
 use App\Entity\OrdersDetails;
-use App\Repository\ProductRepository;
+use App\Repository\Back_office\Product\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/orders', name: 'orders_')]
 class OrdersController extends AbstractController
 {
     /**
@@ -25,7 +24,7 @@ class OrdersController extends AbstractController
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('/view', name: 'view', methods: ['GET'] )]
+    #[Route('admin/orders', name: 'admin_orders_index', methods: ['GET'] )]
     public function index(
         ProductRepository $repository, 
         PaginatorInterface $paginator, 
@@ -41,7 +40,7 @@ class OrdersController extends AbstractController
             10 /*limit per page*/
         );
         
-        return $this->render('orders/index.html.twig', [
+        return $this->render('Back_office/Orders/index.html.twig', [
             'orders' => $orders
         ]);
     }

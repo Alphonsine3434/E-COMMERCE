@@ -10,6 +10,6 @@ class HomepageBackController extends AbstractController
     #[Route('/admin', name: 'admin_homepage_index')]
     public function index(): Response
     {
-        return $this->render('Back_office/Authentification/Login/login.html.twig');
+        return $this->render('Back_office/Homepage_back/index.html.twig');
     }
 }

@@ -43,24 +43,6 @@ class SupplierType extends AbstractType
                     new Assert\Length( min: 2 )
                 ]
             ])
-            ->add('brands', CollectionType::class, [
-                'entry_type' => BrandsType::class,
-                'label' => false,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true,
-                'entry_options' => [
-                    'attr' => [
-                        'class' => 'form-control',
-                        
-                    ],                   
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Length( min: 2 )
-                ]
-                
-            ])
             ->add('save', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
