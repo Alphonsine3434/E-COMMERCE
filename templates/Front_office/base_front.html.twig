@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>{% block title %}Dashboard{% endblock %}</title>
+        <meta content="" name="description">
+        <meta content="" name="keywords">
+        
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+        
+        {% block stylesheets %}
+            <!-- Vendor CSS Files -->
+            <link href="{{ asset('Front_office/assets/css/bootstrap.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('Front_office/assets/css/font-awesome.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('Front_office/assets/css/elegant-icons.css') }}" rel="stylesheet">
+            <link href="{{ asset('Front_office/assets/css/flaticon.css') }}" rel="stylesheet">
+            <link href="{{ asset('Front_office/assets/css/nice-select.css') }}" rel="stylesheet">
+            <link href="{{ asset('Front_office/assets/css/barfiller.css') }}" rel="stylesheet">
+            <link href="{{ asset('Front_office/assets/css/magnific-popup.css') }}" rel="stylesheet">
+            <link href="{{ asset('Front_office/assets/css/jquery-ui.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('Front_office/assets/css/owl.carousel.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('Front_office/assets/css/css/slicknav.min.css') }}" rel="stylesheet">
+            <link href="{{ asset('Front_office/assets/css/style.css') }}" rel="stylesheet">
+        {% endblock %}
+
+        
+    </head>
+    <body>
+       
+        {% block body %}
+        {% endblock %}
+
+        {% block javascripts %}
+            <!-- Vendor JS Files -->
+            <script src="{{ asset('Front_office/assets/js/jquery-3.3.1.min.js') }}"></script>
+            <script src="{{ asset('Front_office/assets/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('Front_office/assets/js/jquery.nice-select.min.js') }}"></script>
+            <script src="{{ asset('Front_office/assets/js/jquery-ui.min.js') }}"></script>
+            <script src="{{ asset('Front_office/assets/js/jquery.nicescroll.min.js') }}"></script>
+            <script src="{{ asset('Front_office/assets/js/jquery.barfiller.js') }}"></script>
+            <script src="{{ asset('Front_office/assets/js/jquery.magnific-popup.min.js') }}"></script>
+            <script src="{{ asset('Front_office/assets/js/jquery.slicknav.js') }}"></script>
+            <script src="{{ asset('Front_office/assets/js/owl.carousel.min.js') }}"></script>
+            <script src="{{ asset('Front_office/assets/js/main.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>

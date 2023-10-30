@@ -12,14 +12,14 @@ class BrandsFixtures extends Fixture implements DependentFixtureInterface
     private $counter = 1;
     public function load(ObjectManager $manager): void
     {   
-        $mots_brands = ['Citroën.', 'Volkswagen', 'Opel', 'Toyota', 'Ferrari.'];
+        $mots_brands = ['Citroën.', 'Volkswagen', 'Toyota', 'Ferrari.'];
         
-        for($i=0; $i<20; $i++){
+        for($i=0; $i<3; $i++){
             $brands = new Brands();
-            $brands->setName($mots_brands[mt_rand(0,4)]);
+            $brands->setName($mots_brands[$i]);
             
             //On va chercher fournisseur du marque
-            $supplier = $this->getReference('supplier-'.$i+1);
+            $supplier = $this->getReference('supplier-'.$this->counter);
             $brands->setSupplier($supplier);
 
             $manager->persist($brands);

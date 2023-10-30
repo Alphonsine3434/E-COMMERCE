@@ -16,15 +16,15 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
 
         for($i=0; $i<20; $i++){
             $product = new Product();
-            $product->setTitle("Produit $i")
-                ->setDescription("Produit spéciale $i")
+            $product->setTitle("Voiture $i")
+                ->setDescription("Voiture spéciale $i")
                 ->setQuantityStock(mt_rand(1,30))
                 ->setPrice(mt_rand(100,200))
                 ->setTypes($mots_types[mt_rand(0,2)])
                 ->setGender($mots_gender[mt_rand(0,4)]);
 
             //On va chercher marque du produit
-            $brands = $this->getReference('brand-'.rand(1,20));
+            $brands = $this->getReference('brand-'.rand(1,3));
             $product->setBrands($brands);
 
             $manager->persist($product);

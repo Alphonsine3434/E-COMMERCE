@@ -14,9 +14,9 @@ class SupplierFixtures extends Fixture
         
         $mots_supplier = ['Mycar.', 'Driver', 'CarLuxe', 'SpecialCar'];
         
-        for($i=0; $i<20; $i++){
+        for($i=0; $i<3; $i++){
             $supplier = new Supplier();
-            $supplier->setName($mots_supplier[mt_rand(0,3)]);
+            $supplier->setName($mots_supplier[$i]);
             $supplier->setReference('fournisseur-'.$i);
             
             $manager->persist($supplier);
