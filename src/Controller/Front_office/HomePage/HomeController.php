@@ -5,9 +5,7 @@ namespace App\Controller\Front_office\HomePage;
 use App\Repository\Back_office\Brands\BrandsRepository;
 use App\Repository\Back_office\Product\ProductRepository;
 use App\Repository\Back_office\Supplier\SupplierRepository;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,30 +13,17 @@ class HomeController extends AbstractController
 {
     #[Route('/home', name: 'app_home_index', methods: ['GET'] )]
     public function index(
-        ProductRepository $repositoryProduct,
-        BrandsRepository $repositoryBrands, 
-        SupplierRepository $supplierRepository,
-        PaginatorInterface $paginator, 
-        Request $request ): Response
+            ProductRepository $repositoryProduct,
+            BrandsRepository $repositoryBrands, 
+            SupplierRepository $supplierRepository 
+        ): Response
     {
 
-        $products = $paginator->paginate(
-            $repositoryProduct->findAll(),
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
-        );
+        $products = $repositoryProduct->findAll();
 
-        $brands = $paginator->paginate(
-            $repositoryBrands->findAll(),
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
-        );
+        $brands = $repositoryBrands->findAll();
 
-        $suppliers = $paginator->paginate(
-            $supplierRepository->findAll(),
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
-        );
+        $suppliers =  $supplierRepository->findAll();
 
         return $this->render('Front_office/HomePage_front/index.html.twig'
         , [
